@@ -135,7 +135,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--epochs",
         type=int,
-        default=51,
+        default=300,
         help="Number of epochs for training last layers and number of epochs for fine-tuning layers. Default is 51.",
     )
     parser.add_argument(
@@ -276,7 +276,7 @@ if __name__ == "__main__":
             validation_steps=max(1, num_val // batch_size),
             epochs=epoch1 + epoch2,
             initial_epoch=epoch1,
-            callbacks=[logging, checkpoint, reduce_lr, early_stopping],
+            callbacks=[logging, checkpoint, reduce_lr],
         )
         model.save_weights(os.path.join(log_dir, "trained_weights_final.h5"))
         step2_train_loss = history.history["loss"]
